@@ -11,6 +11,9 @@ COPY package*.json ./
 # Install dependencies in Docker
 RUN npm install
 
+# Install dependencies in Docker
+RUN npm install -g typescript
+
 RUN npm run build
 
 # Copy app from local environment into the Docker image
