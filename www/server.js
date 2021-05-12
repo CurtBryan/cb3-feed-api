@@ -19,29 +19,41 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const config_1 = require("./config/config");
 const model_index_1 = require("./controllers/v0/model.index");
 (() => __awaiter(this, void 0, void 0, function* () {
-    yield sequelize_1.sequelize.addModels(model_index_1.V0_FEED_MODELS);
-    yield sequelize_1.sequelize.sync();
-    const app = express_1.default();
-    const port = process.env.PORT || 8080;
-    app.use(body_parser_1.default.json());
-    app.use(cors_1.default({
-        allowedHeaders: [
-            'Origin', 'X-Requested-With',
-            'Content-Type', 'Accept',
-            'X-Access-Token', 'Authorization',
-        ],
-        methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-        origin: config_1.config.url,
-    }));
-    app.use('/api/v0/', index_router_1.IndexRouter);
-    // Root URI call
-    app.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
-        res.send('/api/v0/');
-    }));
-    // Start the Server
-    app.listen(port, () => {
-        console.log(`server running ${config_1.config.url}`);
-        console.log(`press CTRL+C to stop server`);
-    });
+    try {
+        if (process.env.ENVIRONMENT === "LOCAL") {
+            require("dotenv").config();
+        }
+        console.log(config_1.config);
+        yield sequelize_1.sequelize.addModels(model_index_1.V0_FEED_MODELS);
+        yield sequelize_1.sequelize.sync();
+        const app = express_1.default();
+        const port = process.env.PORT || 8080;
+        app.use(body_parser_1.default.json());
+        app.use(cors_1.default({
+            allowedHeaders: [
+                "Origin",
+                "X-Requested-With",
+                "Content-Type",
+                "Accept",
+                "X-Access-Token",
+                "Authorization",
+            ],
+            methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+            origin: config_1.config.url,
+        }));
+        app.use("/api/v0/", index_router_1.IndexRouter);
+        // Root URI call
+        app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+            res.send("/api/v0/");
+        }));
+        // Start the Server
+        app.listen(port, () => {
+            console.log(`server running ${config_1.config.url}`);
+            console.log(`press CTRL+C to stop server`);
+        });
+    }
+    catch (err) {
+        console.error(err);
+    }
 }))();
 //# sourceMappingURL=server.js.map
