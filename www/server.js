@@ -23,7 +23,7 @@ const model_index_1 = require("./controllers/v0/model.index");
         if (process.env.ENVIRONMENT === "LOCAL") {
             require("dotenv").config();
         }
-        console.log(config_1.config);
+        console.log("region: ", config_1.config.aws_region);
         yield sequelize_1.sequelize.addModels(model_index_1.V0_FEED_MODELS);
         yield sequelize_1.sequelize.sync();
         const app = express_1.default();

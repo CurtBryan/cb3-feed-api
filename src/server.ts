@@ -13,7 +13,7 @@ import { V0_FEED_MODELS } from "./controllers/v0/model.index";
     if (process.env.ENVIRONMENT === "LOCAL") {
       require("dotenv").config();
     }
-    console.log(config)
+    console.log("region: ", config.aws_region)
     await sequelize.addModels(V0_FEED_MODELS);
     await sequelize.sync();
 
