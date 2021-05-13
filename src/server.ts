@@ -44,7 +44,7 @@ import { V0_FEED_MODELS } from "./controllers/v0/model.index";
       );
       res.header(
         "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Access-Token"
       );
       next();
     });

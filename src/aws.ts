@@ -6,6 +6,12 @@ import {config} from './config/config';
 // const credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
 // AWS.config.credentials = credentials;
 
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: config.aws_media_bucket
+})
+
 export const s3 = new AWS.S3({
   signatureVersion: 'v4',
   region: config.aws_region,
